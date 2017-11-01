@@ -5,7 +5,6 @@ import NavBar from './navbar.jsx';
 import Main from './main.jsx';
 
 const App = () => (
-  // might want to turn this into an actual nav with bootstrap
     <div>
       <NavBar />
       <Main />

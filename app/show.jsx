@@ -1,6 +1,9 @@
 import React from 'react';
 import { Component } from 'react';
+import axios from 'axios';
 import { Table, Col } from 'react-bootstrap';
+
+
 
 export default class ShowNames extends Component {
   constructor(props) {
@@ -18,7 +21,15 @@ export default class ShowNames extends Component {
   }
 
   componentWillMount() {
-    //this is where i will get the data
+
+    // axios.create({
+    //   baseURL: '10cb63d68f47'
+    // })
+
+    axios.get('/users')
+    .then((resp) => {
+      console.log('response', resp);
+    })
   }
 
   render() {

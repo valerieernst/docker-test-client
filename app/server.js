@@ -1,16 +1,16 @@
 const express = require('express');
 const path = require('path');
 const webpack = require('webpack');
+const proxy = require('http-proxy-middleware');
 const webpackDevMiddleware = require('webpack-dev-middleware');
 const webpackConfig = require('../webpack.config.js');
-
 
 const app = express();
 
 //use webpack with custom config
 const compiler = webpack(webpackConfig);
 
-// should eventually switch to hot reload, but this is quick
+// todo: should eventually switch to hot reload, but this is quick
 app.use(webpackDevMiddleware(compiler, {
   publicPath: '/',
   stats: {
@@ -24,8 +24,10 @@ app.use(webpackDevMiddleware(compiler, {
     chunkModules: false
   }
 }));
-
+// todo: in production serve static assets from nginx because it's faster
 app.use(express.static(path.join(__dirname, '../dist')));
+
+app.use('/', proxy({target: 'http://127.0.0.1:8080', changeOrigin: true}));
 
 const port = process.env.PORT || 3030;
 
