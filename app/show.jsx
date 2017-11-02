@@ -10,25 +10,20 @@ export default class ShowNames extends Component {
     super(props);
 
     this.state = {
-      people: [
-          {
-              "id": 1,
-              "first_name": "test",
-              "last_name": "testy"
-          }
-      ]
+      people: []
     };
   }
 
   componentWillMount() {
-
-    // axios.create({
-    //   baseURL: '10cb63d68f47'
-    // })
-
-    axios.get('/users')
-    .then((resp) => {
-      console.log('response', resp);
+    // todo proxy requests from the frontend server so don't have to hardcode host
+    axios.get('http://localhost:8080/users')
+    .then(({ data }) => {
+      this.setState({
+        people: data
+      });
+    })
+    .catch((err) => {
+      console.log('err', err)
     })
   }
 

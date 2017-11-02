@@ -25,9 +25,9 @@ app.use(webpackDevMiddleware(compiler, {
   }
 }));
 // todo: in production serve static assets from nginx because it's faster
-app.use(express.static(path.join(__dirname, '../dist')));
+// app.use('/',proxy({target: 'http:127.0.0.1:8080', changeOrigin: true}));
 
-app.use('/', proxy({target: 'http://127.0.0.1:8080', changeOrigin: true}));
+app.use(express.static(path.join(__dirname, '../dist')));
 
 const port = process.env.PORT || 3030;
 

@@ -16,5 +16,6 @@ RUN npm install
 COPY . .
 
 EXPOSE 3030
+EXPOSE 8080
 EXPOSE 80
 CMD [ "npm", "start" ]

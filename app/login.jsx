@@ -1,5 +1,6 @@
 import React from 'react';
 import { Component } from 'react';
+import axios from 'axios';
 import { Form, FormGroup, FormControl, Col, ControlLabel, Button } from 'react-bootstrap';
 
 
@@ -23,8 +24,20 @@ export default class LoginForm extends Component {
     })
   }
 
-  submitLoginForm() {
-    // and this is where i'll post data!
+// todo: will need to sanitize user input in non-test app
+  submitLoginForm(e) {
+    e.preventDefault();
+
+    axios.post('http://127.0.0.1:8080/users', {
+      firstName: this.state.firstName,
+      lastName: this.state.lastName
+    })
+    .then(function (response) {
+      console.log(response);
+    })
+    .catch(function (error) {
+      console.log(error);
+    });
   }
 
   render() {
