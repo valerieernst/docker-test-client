@@ -28,7 +28,7 @@ export default class LoginForm extends Component {
   submitLoginForm(e) {
     e.preventDefault();
 
-    axios.post('http://127.0.0.1:8080/users', {
+    axios.post('/api/users', {
       firstName: this.state.firstName,
       lastName: this.state.lastName
     })

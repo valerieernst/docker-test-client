@@ -24,8 +24,13 @@ app.use(webpackDevMiddleware(compiler, {
     chunkModules: false
   }
 }));
+
+const proxyOptions = {
+  target: 'http://dockertest_server_1',
+  changeOrigin: true
+}
 // todo: in production serve static assets from nginx because it's faster
-// app.use('/',proxy({target: 'http:127.0.0.1:8080', changeOrigin: true}));
+app.use('/api',proxy(proxyOptions));
 
 app.use(express.static(path.join(__dirname, '../dist')));
 

@@ -16,7 +16,7 @@ export default class ShowNames extends Component {
 
   componentWillMount() {
     // todo proxy requests from the frontend server so don't have to hardcode host
-    axios.get('http://localhost:8080/users')
+    axios.get('/api/users')
     .then(({ data }) => {
       this.setState({
         people: data
