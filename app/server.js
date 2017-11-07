@@ -27,14 +27,14 @@ app.use(webpackDevMiddleware(compiler, {
 
 
 
-if(process.env.NODE_ENV === 'development') {
-  const proxyTarget = process.env.PROXY_TARGET || 'http://dockertest_server_1';
-  const proxyOptions = {
-    target: proxyTarget,
-    changeOrigin: true
-  }
-  app.use('/api', proxy(proxyOptions));
+
+const proxyTarget = process.env.PROXY_TARGET || 'http://dockertest_server_1';
+const proxyOptions = {
+  target: proxyTarget,
+  changeOrigin: true
 }
+app.use('/api', proxy(proxyOptions));
+
 
 // todo: in production serve static assets from nginx because it's faster
 app.use(express.static(path.join(__dirname, '../dist')));
